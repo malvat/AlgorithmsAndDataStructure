@@ -10,3 +10,13 @@ Stack is a First In Last Out type of data structure.
 ```
 py Stack.py
 ```
+
+### Queue
+Queue is a First In First Out type of data structure.
+
+### Running Queue.py
+- Clone repository 
+- Run the file
+```
+py Queue.py
+```
