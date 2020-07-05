@@ -112,6 +112,88 @@ class Tree:
 
     def find(self, value):
         return self.root.find(value)
+    
+    def delete(self, value):
+        """
+            deletes the node from the tree with value given
+
+            Parameter
+            ---------
+            value: value to be deleted
+        """
+        current = self.root         # set the current node to root
+        parent = current            
+        is_left_child = False       # to keep track if the current is parent's left child or right
+
+        if current == None:
+            # tree does not exists
+            return False
+        
+        # traversing tree to find the node to be deleted
+        while current != None and current.value != value:
+            parent = current
+            if value > current.value:
+                is_left_child = False
+                current = current.right
+            else:
+                is_left_child = True
+                current = current.left
+            if current == None:
+                break
+        
+        if current == None:
+            # element to be delete not found
+            return False
+        
+        if current.left == None and current.right == None:
+            print("no children")
+            # if node has no children
+            if is_left_child:
+                parent.left = None
+                return True
+            else:
+                parent.right = None
+                return True
+        elif current.left == None and current.right != None:
+            print("left child")
+            # if node has only right child
+            if is_left_child:
+                parent.left = current.right
+            else:
+                parent.right = current.left
+        elif current.left != None and current.right == None:
+            print("right child")
+            # if node has only left child
+            if is_left_child:
+                parent.left = current.left
+            else:
+                parent.right = current.left
+        else:
+            print("two children")
+            # first we need to find current's right children's left most successor
+            successor = current.right
+            successor_parent = current
+            while successor.left != None:
+                successor_parent = sucessor
+                successor = successor.left
+            
+            if is_left_child: 
+                parent.left = successor
+            else:
+                parent.right = successor
+            
+            if successor == current.right:
+                successor.left = current.left
+            else:
+                successor_parent.left = None
+                successor.left = current.left
+                successor.right = current.right
+
+
+
+            
+        
+
         
     def pre_order(self):
         self.root.pre_order()
@@ -126,11 +208,13 @@ class Tree:
 
 if __name__ == "__main__":
     tree = Tree()
-    tree.insert(5)
-    tree.insert(3)
-    tree.insert(7)
-    tree.insert(4)
-    tree.insert(2)
+    tree.insert(50)
+    tree.insert(70)
+    tree.insert(30)
+    tree.insert(20)
+    tree.insert(40)
+    tree.insert(15)
+    tree.insert(25)
     print("tree in pre order: ")
     tree.pre_order()
     print("")
@@ -140,7 +224,9 @@ if __name__ == "__main__":
     print("tree in in order: ")
     tree.in_order()
     print("")
-    print(f'5 is present in the tree: {tree.find(5)}')
-    print(f'1 is present in the tree: {tree.find(1)}')
+    print(f'5 is present in the tree: {tree.find(50)}')
+    print(f'1 is present in the tree: {tree.find(10)}')
+    print(f'20 is delete from the tree: {tree.delete(20)}')
+    tree.in_order()
     
             
