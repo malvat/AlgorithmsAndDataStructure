@@ -105,12 +105,26 @@ class Tree:
         self.root = None
     
     def insert(self, value):
+        """
+            insert method for the tree
+            
+            Parameter
+            ---------
+            value: value to be inserted
+        """
         if self.root == None:
             self.root = Node(value)
         else:
             self.root.insert(value)
 
     def find(self, value):
+        """
+            find a value in the tree
+
+            Parameter
+            ---------
+            value: value to be found
+        """
         return self.root.find(value)
     
     def delete(self, value):
@@ -188,25 +202,29 @@ class Tree:
                 successor_parent.left = None
                 successor.left = current.left
                 successor.right = current.right
-
-
-
-            
-        
-
-        
+       
     def pre_order(self):
+        """
+            prints the tree in pre order traversal
+        """
         self.root.pre_order()
 
     def post_order(self):
+        """
+            prints the tree in post order traversal
+        """
         self.root.post_order()
 
     def in_order(self):
+        """
+            prints the tree in in order traversal
+        """
         self.root.in_order()
 
 
 
 if __name__ == "__main__":
+    # testing tree implementation
     tree = Tree()
     tree.insert(50)
     tree.insert(70)
@@ -228,5 +246,3 @@ if __name__ == "__main__":
     print(f'1 is present in the tree: {tree.find(10)}')
     print(f'20 is delete from the tree: {tree.delete(20)}')
     tree.in_order()
-    
-            
